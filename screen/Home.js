@@ -47,8 +47,6 @@ const Home = () => {
           (item, index) => item.Title
         )
 
-          console.log('nationalCountriesTitles', nationalCountriesTitles);
-
         moviesWithoutNationals = moviesJson.filter((item, index) => {
           return !nationalCountriesTitles.includes(item.Title)
         })
