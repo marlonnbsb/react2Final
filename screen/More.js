@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components/native";
 import Avatar from "../components/Avatar";
 import { View } from "react-native";
+import { ProfileContext } from "../context/ProfileContext";
 // import { MaterialIcons } from "@expo/vector-icons";
 
 const Screen = styled.View`
@@ -92,33 +93,43 @@ const editProfile = (navigation, profiles) => {
 };
 
 const More = (props) => {
-  console.log(props);
+  // console.log(props);
   replaceAvatarsWithImage(props, profilesAvailables);
 
   return (
-    <Screen>
-      <AvantarsContainer>
-        <Row horizontal>
-          {profilesAvailables.map((item) => {
-            return (
-              <Avatar
-                key={item.name}
-                image={item.icon}
-                uri={item.uri}
-                name={item.name}
-                onPress={(item) => selectProfile(props.navigation, item)}
-              />
-            );
-          })}
-        </Row>
-      </AvantarsContainer>
-      <NetflixButton
-        onPress={() => editProfile(props.navigation, profilesAvailables)}
-      >
-        {/* <MaterialIcons name="edit" size={24} color="gray" /> */}
-        <ButtonLabel>Gerenciar perfis</ButtonLabel>
-      </NetflixButton>
-    </Screen>
+    <ProfileContext.Consumer>
+      {(info) => {
+        return (
+          <Screen>
+            <AvantarsContainer>
+              <Row horizontal>
+                {profilesAvailables.map((item) => {
+                  return (
+                    <Avatar
+                      highlight={info.user === item.name}
+                      key={item.name}
+                      image={item.icon}
+                      uri={item.uri}
+                      name={item.name}
+                      onPress={() => {
+                        info.changeProfile(item);
+                        selectProfile(props.navigation, item);
+                      }}
+                    />
+                  );
+                })}
+              </Row>
+            </AvantarsContainer>
+            <NetflixButton
+              onPress={() => editProfile(props.navigation, profilesAvailables)}
+            >
+              {/* <MaterialIcons name="edit" size={24} color="gray" /> */}
+              <ButtonLabel>Gerenciar perfis</ButtonLabel>
+            </NetflixButton>
+          </Screen>
+        )
+      }}
+    </ProfileContext.Consumer>
   );
 };
 
