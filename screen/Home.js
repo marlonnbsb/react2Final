@@ -29,6 +29,7 @@ const Gradient = styled(LinearGradient)`
 const Home = () => {
     const [movies, setMovies] = useState([]);
     const [nationalMovies, setNationalMovies] = useState([]);
+    const [position, setPosition] = useState(null);
 
     getResumeMovie = (user) => {
       const moviesresumeJson = require('../assets/moveisToResume.json');
@@ -36,13 +37,32 @@ const Home = () => {
     };
 
     useEffect(() => {
+      const obtainLocation = async () => {
+        try {
+          const result = await getLocation();
+          setPosition(result)
+        } catch (error) {
+          console.log('obtainLocationError', error);
+        }
+      };
+      obtainLocation();
+    }, [])
+
+    useEffect(() => {
       const loadindMovies = async () => {
         const moviesJson = require('../assets/Movies.json');
-        const position = await getLocation();
-        const nationalCountries = await filterByCountry(moviesJson, position);
-        setNationalMovies(nationalCountries);
+        const nationalCountries = [];
 
-        const nationalCountriesTitles = nationalCountries.map(
+        try {
+          if (position !== null) {
+            const nationalCountries = await filterByCountry(moviesJson, position);
+            setNationalMovies(nationalCountries);
+          }
+        }catch (error) {
+          console.log('teste', error)
+        }
+      
+        const nationalCountriesTitles = nationalMovies.map(
           (item, index) => item.Title
         )
 
@@ -54,7 +74,7 @@ const Home = () => {
 
       };
       loadindMovies();
-    }, [])
+    }, [position])
 
 
   return (
@@ -81,7 +101,9 @@ const Home = () => {
               </Gradient>
             </Poster>
             <Movies label="Recomendados" data={movies} />
-            <Movies label="Nacionais" data={nationalMovies} />
+            {nationalMovies && nationalMovies.length > 0 && (
+              <Movies label="Nacionais" data={nationalMovies} />
+            )}
             <Movies label={`Continuar assistindo como ${info.user}`} data={getResumeMovie(info.user)} />
           </Container>
         </>
