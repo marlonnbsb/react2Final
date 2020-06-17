@@ -19,11 +19,19 @@ export const filterByCountry = async (movies, geolocation) => {
     lat: geolocation.coords.latitude,
     lng: geolocation.coords.longitude,
   });
-
+  console.log('location', location)
   const nacional = movies.filter((item, index) => {
     const countries = item.Country.split(',');
     return countries.some((item, index) => {
-      return item === location[0].country || item === location[0].countryCode;
+      var translateNormalaze = null
+      if (location[0].country === "Brasil") {
+         translateNormalaze = "Brazil"
+      } else if (location[0].countryCode === "US") {
+        translateNormalaze = "USA"
+      } else {
+        translateNormalaze = location[0].country;
+      }
+      return item === translateNormalaze || item === location[0].countryCode;
     })
   });
   return nacional;

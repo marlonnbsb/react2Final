@@ -11,6 +11,7 @@ import Hero from '../components/Hero';
 import Movies from '../components/Movies';
 import {getLocation, filterByCountry} from '../screen/MovieFilter'
 import { ProfileContext } from '../context/ProfileContext';
+import { translate } from '../languages/utils'
 
 const Container = styled.ScrollView`
   flex: 1;
@@ -51,18 +52,18 @@ const Home = () => {
     useEffect(() => {
       const loadindMovies = async () => {
         const moviesJson = require('../assets/Movies.json');
-        const nationalCountries = [];
+        var nationalCountries = [];
 
         try {
           if (position !== null) {
-            const nationalCountries = await filterByCountry(moviesJson, position);
+            nationalCountries = await filterByCountry(moviesJson, position);
             setNationalMovies(nationalCountries);
           }
         }catch (error) {
           console.log('teste', error)
         }
       
-        const nationalCountriesTitles = nationalMovies.map(
+        const nationalCountriesTitles = nationalCountries.map(
           (item, index) => item.Title
         )
 
@@ -100,11 +101,11 @@ const Home = () => {
                 <Hero />
               </Gradient>
             </Poster>
-            <Movies label="Recomendados" data={movies} />
+            <Movies label={translate("recommended")} data={movies} />
             {nationalMovies && nationalMovies.length > 0 && (
-              <Movies label="Nacionais" data={nationalMovies} />
+              <Movies label={translate("national")} data={nationalMovies} />
             )}
-            <Movies label={`Continuar assistindo como ${info.user}`} data={getResumeMovie(info.user)} />
+            <Movies label={translate("continueWatchingAs") + ` ${info.user}`} data={getResumeMovie(info.user)} />
           </Container>
         </>
       )}
@@ -113,3 +114,6 @@ const Home = () => {
 };
 
 export default Home;
+
+
+
