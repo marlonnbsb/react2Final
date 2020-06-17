@@ -155,11 +155,11 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
-        release {
-            storeFile file("app/netflix.keystore")
-            storePassword "12344321"
-            keyAlias "netflix"
-            keyPassword "12344321"
+        releaseSigningConfig {
+            storeFile file('netflix.keystore')
+            storePassword '12344321'
+            keyAlias 'netflix'
+            keyPassword '12344321'
         }
     }
     buildTypes {
@@ -169,7 +169,7 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://facebook.github.io/react-native/docs/signed-apk-android.
-            signingConfig signingConfigs.release
+            signingConfig signingConfigs.releaseSigningConfig
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
