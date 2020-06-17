@@ -1,20 +1,17 @@
 import "react-native-gesture-handler";
 import React, { useEffect, useState } from 'react';
 import messaging from '@react-native-firebase/messaging';
-
 import {Notifications} from 'react-native-notifications';
-
-import Home from './screen/Home'
-
-
 import { NavigationContainer } from "@react-navigation/native";
 import Routes from "./routes/routes";
 import { ProfileContext } from "./context/ProfileContext";
+import { configureLanguageToI18n } from './languages/utils'
 
 class App extends React.Component {
 
 	constructor(props) {
 		super(props);
+		configureLanguageToI18n();
 		this.changeProfile = this.changeProfile.bind(this);
 		this.state = {
 			user: 'José',

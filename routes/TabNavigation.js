@@ -3,9 +3,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screen/Home";
 import More from "../screen/More";
 import MovieFilter from "../screen/MovieFilter";
-// import { Ionicons } from "@expo/vector-icons";
 import Icon from 'react-native-vector-icons/Ionicons';
-
+import { translate } from '../languages/utils'
 
 const Tab = createBottomTabNavigator();
 
@@ -32,16 +31,17 @@ const TabNavigation = () => {
           },
         }}
       />
-      <Tab.Screen name="Buscar" 
-      component={Home} 
-      options={{
-        tabBarIcon: ({ color, size }) => {
-          return <Icon name="md-search" size={25} color="white" />
-        },
+      <Tab.Screen 
+        name={translate("search")}
+        component={Home} 
+        options={{
+          tabBarIcon: ({ color, size }) => {
+            return <Icon name="md-search" size={25} color="white" />
+          },
       }}
       />
       <Tab.Screen
-        name="Em breve"
+        name={translate("soon")}
         component={Home}
         options={{
           tabBarIcon: ({ color, size }) => {
@@ -57,7 +57,8 @@ const TabNavigation = () => {
         },
       }}
       />
-      <Tab.Screen name="Mais" 
+      <Tab.Screen 
+      name={translate("more")}
       component={More} 
       options={{
         tabBarIcon: ({ color, size }) => {
