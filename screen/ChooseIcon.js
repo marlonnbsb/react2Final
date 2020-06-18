@@ -59,8 +59,7 @@ const ChooseIcon = (props) => {
               key={index}
               image={item}
               onPress={() => {
-                props.navigation.navigate("TabNavigation", {
-                  screen: "Mais",
+                props.navigation.navigate("Mais", {
                   icon: item,
                   name: props?.route?.params?.name,
                   image: null,

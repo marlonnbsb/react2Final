@@ -19,7 +19,7 @@ export const filterByCountry = async (movies, geolocation) => {
     lat: geolocation.coords.latitude,
     lng: geolocation.coords.longitude,
   });
-  console.log('location', location)
+
   const nacional = movies.filter((item, index) => {
     const countries = item.Country.split(',');
     return countries.some((item, index) => {

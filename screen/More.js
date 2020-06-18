@@ -4,6 +4,7 @@ import Avatar from "../components/Avatar";
 import { View } from "react-native";
 import { ProfileContext } from "../context/ProfileContext";
 // import { MaterialIcons } from "@expo/vector-icons";
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const Screen = styled.View`
   flex: 1;
@@ -93,7 +94,6 @@ const editProfile = (navigation, profiles) => {
 };
 
 const More = (props) => {
-  // console.log(props);
   replaceAvatarsWithImage(props, profilesAvailables);
 
   return (
@@ -124,6 +124,7 @@ const More = (props) => {
               onPress={() => editProfile(props.navigation, profilesAvailables)}
             >
               {/* <MaterialIcons name="edit" size={24} color="gray" /> */}
+              <Icon name="edit" size={25} color="white" />
               <ButtonLabel>Gerenciar perfis</ButtonLabel>
             </NetflixButton>
           </Screen>

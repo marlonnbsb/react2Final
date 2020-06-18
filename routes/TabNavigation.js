@@ -32,18 +32,20 @@ const TabNavigation = () => {
         }}
       />
       <Tab.Screen 
-        name={translate("search")}
+        name="Buscar" 
         component={Home} 
         options={{
+          tabBarLabel: translate("search"),
           tabBarIcon: ({ color, size }) => {
             return <Icon name="md-search" size={25} color="white" />
           },
       }}
       />
       <Tab.Screen
-        name={translate("soon")}
+        name="Em breve"
         component={Home}
         options={{
+          tabBarLabel: translate("soon"),
           tabBarIcon: ({ color, size }) => {
             return <Icon name="md-photos" size={25} color="white" />
           },
@@ -58,9 +60,10 @@ const TabNavigation = () => {
       }}
       />
       <Tab.Screen 
-      name={translate("more")}
+      name="Mais"
       component={More} 
       options={{
+        tabBarLabel:translate("more"),
         tabBarIcon: ({ color, size }) => {
           return <Icon name="md-menu" size={25} color="white" />
         },
