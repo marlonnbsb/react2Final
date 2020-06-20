@@ -26,6 +26,7 @@ const TabNavigation = () => {
         name="Home"
         component={Home}
         options={{
+          tabBarLabel: translate("home"),
           tabBarIcon: ({ color, size }) => {
             return <Icon name="md-home" size={25} color="white" />
           },
@@ -54,6 +55,7 @@ const TabNavigation = () => {
       <Tab.Screen name="Downloads" 
       component={Home} 
       options={{
+        tabBarLabel:translate("downloads"),
         tabBarIcon: ({ color, size }) => {
           return <Icon name="md-download" size={25} color="white" />
         },
